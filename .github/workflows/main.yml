@@ -17,10 +17,7 @@ jobs:
         id: "read_json"
         shell: bash
         run: |
-          pwd
-          ls -lah
-          cat ${{ env.file_path }}
-          echo "json_content=$(cat ${{ env.file_path }})" >> "$GITHUB_OUTPUT"
+          echo "json_content='$(cat ${{ env.file_path }})'" >> "$GITHUB_OUTPUT"
 
       - name: "Dump JSON file content"
         id: "dump_json"
