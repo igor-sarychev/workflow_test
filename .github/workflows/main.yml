@@ -5,7 +5,7 @@ run-name: "RunMe"
   push: {}
 
 env:
-  file_path: "./testdata.json"
+  file_path: "testdata.json"
 
 jobs:
   say_hello:
@@ -15,6 +15,8 @@ jobs:
         id: "read_json"
         shell: bash
         run: |
+          pwd
+          ls -lah
           cat ${{ env.file_path }}
           echo "json_content=$(cat ${{ env.file_path }})" >> "$GITHUB_OUTPUT"
 
