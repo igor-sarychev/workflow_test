@@ -17,18 +17,5 @@ jobs:
         id: "read_json"
         shell: bash
         run: |
-          echo "json_content=$(cat ${{ env.file_path }})" >> "$GITHUB_ENV"
-
-      - name: "Dump JSON file content"
-        id: "dump_json"
-        shell: bash
-        # run: "echo ${{ toJSON(steps.read_json.outputs.json_content) }}"
-        run: "echo ${{ steps.read_json.env.json_content }}"
-
-  say_goodby:
-    runs-on: "self-hosted"
-    steps:
-      - name: "I just want to say goodby"
-        id: "saygoodby"
-        run: "echo goodby"
-        shell: bash
+          json_content=$(cat ${{ env.file_path }})
+          echo ${{ toJSON(${json_content}) }}
