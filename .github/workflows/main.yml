@@ -4,13 +4,15 @@ run-name: "RunMe"
 "on":
   workflow_dispatch:
     inputs:
-      environemnt:
+      environ:
         description: "Run on environemnt"
         type: environment
+        required: true
+        default: "staging"
 
 env:
   file_path: "testdata.json"
-  run_on_env: ${{ inputs.environment }}
+  run_on_env: "${{ inputs.environ }}"
 
 jobs:
   say_hello:
