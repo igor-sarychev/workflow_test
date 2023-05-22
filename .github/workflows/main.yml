@@ -19,7 +19,7 @@ jobs:
       - name: "Dump JSON file content"
         id: "dump_json"
         shell: bash
-        run: "echo ${{ toJSON(${{ steps.read_json.outputs.json_content }}) }}"
+        run: "echo ${{ toJSON(steps.read_json.outputs.json_content) }}"
 
   say_goodby:
     runs-on: "self-hosted"
