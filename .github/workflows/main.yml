@@ -1,4 +1,5 @@
 name: "RunMe"
+run-name: "RunMe"
 
 "on":
   push: {}
