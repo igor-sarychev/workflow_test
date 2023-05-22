@@ -10,10 +10,16 @@ jobs:
   say_hello:
     runs-on: "self-hosted"
     steps:
-      - name: "I just want to say hello"
-        id: "sayhello"
-        run: "echo hello"
+      - name: "Read JSON file"
+        id: "read_json"
         shell: bash
+        run: |
+          echo "json_content=$(cat ${{ env.file_path }})" >> $GITHUB_OUTPUT
+
+      - name: "Dump JSON file content"
+        id: "dump_json"
+        shell: bash
+        run: "echo ${{ toJSON(${{ steps.read_json.outputs.json_content }}) }}"
 
   say_goodby:
     runs-on: "self-hosted"
