@@ -1,0 +1,24 @@
+name: "RunMe"
+
+"on":
+  workflow_dispatch: {}
+
+env:
+  file_path: "./testdata.json"
+
+jobs:
+  say_hello:
+    runs-on: "self-hosted"
+    steps:
+      - name: "I just want to say hello"
+        id: "sayhello"
+        run: "echo hello"
+        shell: bash
+
+  say_goodby:
+    runs-on: "self-hosted"
+    steps:
+      - name: "I just want to say goodby"
+        id: "saygoodby"
+        run: "echo goodby"
+        shell: bash
