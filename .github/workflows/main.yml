@@ -2,10 +2,15 @@ name: "RunMe"
 run-name: "RunMe"
 
 "on":
-  push: {}
+  workflow_dispatch:
+    inputs:
+      environemnt:
+        description: "Run on environemnt"
+        type: environment
 
 env:
   file_path: "testdata.json"
+  run_on_env: ${{ inputs.environment }}
 
 jobs:
   say_hello:
@@ -13,9 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: "Read JSON file"
-        id: "read_json"
+      - name: "chack environment"
+        id: "check_env"
         shell: bash
-        run: |
-          json_content=$(cat ${{ env.file_path }})
-          echo ${{ toJSON(${json_content}) }}
+        run: "echo ${{ env.run_on_env }}"
