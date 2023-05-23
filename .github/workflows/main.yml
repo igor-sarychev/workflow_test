@@ -1,5 +1,5 @@
 name: "RunMe"
-run-name: "RunMe"
+run-name: "RunMe on ${{ inputs.environ }}"
 
 "on":
   workflow_dispatch:
