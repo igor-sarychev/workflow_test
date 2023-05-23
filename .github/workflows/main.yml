@@ -63,4 +63,4 @@ jobs:
           scenarioIDs: ${{ needs.prepare_tests.outputs.scenarioIDs }}
           environ: ${{ inputs.environ }}
         run: |
-          printf "We run tests on [%s] with ScenaioIDs: [%s]" $environ $scenarioIDs
+          printf "We run tests on [%s] with ScenaioIDs: [%s]" $environ $scenarioIDs | tee -a $GITHUB_STEP_OUTPUT
