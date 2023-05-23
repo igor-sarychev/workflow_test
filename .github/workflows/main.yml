@@ -31,4 +31,4 @@ jobs:
         env:
           some: ${{ toJSON(steps) }}
         shell: bash
-        run: echo $some
+        run: echo $some | jq
