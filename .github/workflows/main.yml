@@ -30,7 +30,13 @@ jobs:
         continue-on-error: true
         run: |
           ids=$(python3 get_scenario.py -f ${file_path} -e ${run_on_env})
+          echo $ids
           echo "scenarioIDs=${ids}" >> $GITHUB_OUTPUT
+
+      - name: "check outputs"
+        env:
+          steps: ${{ toJSON(steps) }}
+        run: echo $steps
 
       - name: "Finalize preparing"
         if: steps.check_env.outcome == 'failed'
