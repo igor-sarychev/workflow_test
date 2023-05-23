@@ -27,9 +27,17 @@ jobs:
 
       - name: "chack environment"
         id: "check_env"
+        continue-on-error: true
         run: |
-          ids=$(python3 get_scenario.py -f testdata.json -e ${run_on_env})
+          ids=$(python3 get_scenario.py -f ${file_path} -e ${run_on_env})
           echo "scenarioIDs=${ids}" >> $GITHUB_OUTPUT
+
+      - name: "Finalize preparing"
+        if: steps.check_env.outcome == 'failed'
+        id: "finalize"
+        run: |
+          echo "Can not read Scenario IDs for ${run_on_env}" >> $GITHUB_STEP_SUMMARY
+          exit 1
 
   run_tests:
     runs-on: "self-hosted"
