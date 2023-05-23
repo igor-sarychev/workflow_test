@@ -28,5 +28,7 @@ jobs:
           echo "scenarioIDs=${ids}" >> $GITHUB_OUTPUT
 
       - name: "check if steps"
+        env:
+          some: ${{ toJSON(steps) }}
         shell: bash
-        run: echo ${{ fromJSON(steps) }}
+        run: echo $some
