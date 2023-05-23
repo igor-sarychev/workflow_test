@@ -15,20 +15,31 @@ env:
   run_on_env: "${{ inputs.environ }}"
 
 jobs:
-  say_hello:
+  prepare_tests:
     runs-on: "self-hosted"
+    defaults:
+      run:
+        shell: bash
+    outputs:
+      scenarioIDs: ${{ steps.check_env.output.ids }}
     steps:
       - uses: actions/checkout@v3
 
       - name: "chack environment"
         id: "check_env"
-        shell: bash
         run: |
           ids=$(python3 get_scenario.py -f testdata.json -e ${run_on_env})
           echo "scenarioIDs=${ids}" >> $GITHUB_OUTPUT
 
-      - name: "check if steps"
+  run_tests:
+    runs-on: "self-hosted"
+    needs: [prepare_tests]
+    steps:
+      - name: "Run test"
+        id: "run_test"
+        shell: baash
         env:
-          some: ${{ toJSON(steps) }}
-        shell: bash
-        run: echo $some | jq
+          scenarioIDs: ${{ needs.prepare_tests.outputs.scenarioIDs }}
+          environ: ${{ inputs.environ }}
+        run: |
+          printf "We run tests on [%s] with ScenaioIDs: [%s]" $environ $scenarioIDs

@@ -1,36 +1,32 @@
 #!/usr/bin/env python3
 
+"""
+This script prints a comma separated string of scenario ids for given environment, and failed if environment does not
+defined or scenario ids list is empty
+"""
+
 import argparse
 import json
-import logging
+import sys
 from pathlib import Path
-from typing import Optional
-
-
-def parse_args() -> argparse.Namespace:
-    args = argparse.ArgumentParser()
-
-    args.add_argument("-f", "--file", required=True, help="JSON file with scenario IDs")
-    args.add_argument("-e", "--env", required=True, help="Environment name")
-
-    return args.parse_args()
-
-
-def scenario_ids(content: dict, environ: str, separator=",") -> Optional[str]:
-    ids = content.get(environ, "")
-
-    if not ids:
-        return None
-
-    return separator.join(ids)
 
 
 def main() -> None:
-    args = parse_args()
+    pars = argparse.ArgumentParser()
 
-    content = json.loads(Path(args.file).read_text())
+    pars.add_argument("-f", "--file", required=True, help="JSON file with scenario IDs")
+    pars.add_argument("-e", "--env", required=True, help="Environment name")
 
-    print(scenario_ids(content=content, environ=args.env))
+    args = pars.parse_args()
+
+    file_content = json.loads(Path(args.file).read_text())
+
+    ids = file_content.get(args.env, "")
+
+    if not ids:
+        sys.exit(1)
+
+    print(",".join(ids))
 
 
 if __name__ == "__main__":
