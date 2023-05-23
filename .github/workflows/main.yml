@@ -39,7 +39,7 @@ jobs:
         run: echo $steps
 
       - name: "Finalize preparing"
-        if: failure()
+        if: steps.check_env.outcome == 'failure'
         id: "finalize"
         run: |
           echo "Can not read Scenario IDs for ${run_on_env}" >> $GITHUB_STEP_SUMMARY
