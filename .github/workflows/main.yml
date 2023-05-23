@@ -34,10 +34,17 @@ jobs:
   run_tests:
     runs-on: "self-hosted"
     needs: [prepare_tests]
+    defaults:
+      run:
+        shell: bash
     steps:
+      - name: "show vars"
+        env:
+          needs: ${{ toJSON(needs) }}
+        run: echo ${needs}
+
       - name: "Run test"
         id: "run_test"
-        shell: baash
         env:
           scenarioIDs: ${{ needs.prepare_tests.outputs.scenarioIDs }}
           environ: ${{ inputs.environ }}
