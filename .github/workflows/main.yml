@@ -21,7 +21,7 @@ jobs:
       run:
         shell: bash
     outputs:
-      scenarioIDs: ${{ steps.check_env.output.scenarioIDs }}
+      scenarioIDs: ${{ steps.check_env.outputs.scenarioIDs }}
     steps:
       - uses: actions/checkout@v3
 
@@ -29,7 +29,7 @@ jobs:
         id: "check_env"
         continue-on-error: true
         run: |
-          ids=$(python3 get_scenario.py -f ${file_path} -e ${run_on_env})
+          ids=$(python3 get_scenario.py -f "${file_path}" -e "${run_on_env}")
           echo $ids
           echo "scenarioIDs=${ids}" >> $GITHUB_OUTPUT
 
