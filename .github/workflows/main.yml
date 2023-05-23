@@ -23,4 +23,10 @@ jobs:
       - name: "chack environment"
         id: "check_env"
         shell: bash
-        run: "echo ${{ env.run_on_env }}"
+        run: |
+          ids=$(python3 get_scenario.py -f testdata.json -e ${run_on_env})
+          echo "scenarioIDs=${ids}" >> $GITHUB_OUTPUT
+
+      - name: "check if steps"
+        shell: bash
+        run: echo ${{ fromJSON(steps) }}

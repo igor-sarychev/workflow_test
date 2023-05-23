@@ -1,8 +1,12 @@
 {
-    "name": "some name here",
-    "values": [
+    "production": [
         "one",
         "two",
         "three"
+    ],
+    "staging": [
+        "four",
+        "five",
+        "six"
     ]
 }
