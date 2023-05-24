@@ -38,8 +38,8 @@ jobs:
 
       - name: "check outputs"
         env:
-          steps: ${{ toJSON(steps) }}
-        run: echo $steps
+          steps: ${{ toJSON(github) }}
+        run: echo $steps | jq
 
       - name: "Finalize preparing"
         if: steps.check_env.outcome == 'failure'
