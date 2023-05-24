@@ -31,7 +31,7 @@ jobs:
 
       - name: "Set variables"
         id: "set_env"
-        if: github.even_name == 'push'
+        if: github.event_name == 'push'
         run: |
           echo run_on_env="staging" >> $GITHUB_ENV
 
