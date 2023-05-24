@@ -9,6 +9,9 @@ run-name: "RunMe on ${{ inputs.environ }}"
         type: environment
         required: true
         default: "staging"
+  push:
+    branches:
+      - main
 
 env:
   file_path: "testdata.json"
