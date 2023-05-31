@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# some additional comment
 
 """
 This script prints a comma separated string of scenario ids for given environment, and failed if environment does not
