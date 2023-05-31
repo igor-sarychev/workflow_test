@@ -12,6 +12,8 @@ run-name: "RunMe on ${{ inputs.environ }}"
   push:
     branches:
       - main
+    paths:
+      - "some/**"
 
 env:
   file_path: "testdata.json"
@@ -29,50 +31,50 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: "Set variables"
-        id: "set_env"
-        if: github.event_name == 'push'
-        run: |
-          echo run_on_env="staging" >> $GITHUB_ENV
-
-      - name: "chack environment"
-        id: "check_env"
-        continue-on-error: true
-        run: |
-          ids=$(python3 get_scenario.py -f "${file_path}" -e "${run_on_env}")
-          echo $ids
-          echo "scenarioIDs=${ids}" >> $GITHUB_OUTPUT
-
       - name: "check outputs"
         env:
           steps: ${{ toJSON(github) }}
         run: echo $steps | jq
 
-      - name: "Finalize preparing"
-        if: steps.check_env.outcome == 'failure'
-        id: "finalize"
-        run: |
-          echo "Can not read Scenario IDs for ${run_on_env}" >> $GITHUB_STEP_SUMMARY
-          exit 1
+      # - name: "Set variables"
+      #   id: "set_env"
+      #   if: github.event_name == 'push'
+      #   run: |
+      #     echo run_on_env="staging" >> $GITHUB_ENV
 
-  run_tests:
-    runs-on: "self-hosted"
-    needs: [prepare_tests]
-    environment:
-      name: ${{ needs.prepare_tests.output.run_on_env }}
-    defaults:
-      run:
-        shell: bash
-    steps:
-      - name: "show vars"
-        env:
-          needs: ${{ toJSON(needs) }}
-        run: echo ${needs}
+      # - name: "chack environment"
+      #   id: "check_env"
+      #   continue-on-error: true
+      #   run: |
+      #     ids=$(python3 get_scenario.py -f "${file_path}" -e "${run_on_env}")
+      #     echo $ids
+      #     echo "scenarioIDs=${ids}" >> $GITHUB_OUTPUT
 
-      - name: "Run test"
-        id: "run_test"
-        env:
-          scenarioIDs: ${{ needs.prepare_tests.outputs.scenarioIDs }}
-          environ: ${{ inputs.environ }}
-        run: |
-          printf "We run tests on [%s] with ScenaioIDs: [%s]" $environ $scenarioIDs | tee -a $GITHUB_STEP_SUMMARY
+      # - name: "Finalize preparing"
+      #   if: steps.check_env.outcome == 'failure'
+      #   id: "finalize"
+      #   run: |
+      #     echo "Can not read Scenario IDs for ${run_on_env}" >> $GITHUB_STEP_SUMMARY
+      #     exit 1
+
+  # run_tests:
+  #   runs-on: "self-hosted"
+  #   needs: [prepare_tests]
+  #   environment:
+  #     name: ${{ needs.prepare_tests.output.run_on_env }}
+  #   defaults:
+  #     run:
+  #       shell: bash
+  #   steps:
+  #     - name: "show vars"
+  #       env:
+  #         needs: ${{ toJSON(needs) }}
+  #       run: echo ${needs}
+
+  #     - name: "Run test"
+  #       id: "run_test"
+  #       env:
+  #         scenarioIDs: ${{ needs.prepare_tests.outputs.scenarioIDs }}
+  #         environ: ${{ inputs.environ }}
+  #       run: |
+  #         printf "We run tests on [%s] with ScenaioIDs: [%s]" $environ $scenarioIDs | tee -a $GITHUB_STEP_SUMMARY
