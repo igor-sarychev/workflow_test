@@ -22,11 +22,40 @@ jobs:
       - name: "Check environment"
         run: echo "::warning::Here should be environment check"
 
-  build:
-    name: "Build artifacts"
+  codequolity:
+    name: "Code Quolity"
     runs-on: "self-hosted"
+    needs: [prepare]
     defaults:
       run:
         shell: bash
     steps:
       - uses: actions/checkout@v3
+
+      - name: "Sonarqube"
+        run: echo "::warning::SonarQube here"
+
+      - name: "Unit Tests"
+        run: echo "::warning::UnitTests here"
+
+  build:
+    name: "Build artifacts"
+    runs-on: "self-hosted"
+    needs: [codequolity]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Build artifacts"
+        run: echo "::warning::Build artifact here"
+
+      - name: "Build docker image"
+        run: echo "::warning::Build docker image here"
+
+      - name: "Upload artifact to storage"
+        run: echo "::warning::Upload artifact to storage here"
+
+      - name: "Upload docker image"
+        run: echo "::warning::Upload docker image here"
