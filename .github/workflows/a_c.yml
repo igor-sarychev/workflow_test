@@ -1,6 +1,7 @@
 name: "App_a and common"
 
 "on":
+  push: {}
   pull_request:
     types:
       - opened
