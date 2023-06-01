@@ -1,6 +1,6 @@
 ---
 name: "Main pipeline"
-run-name: "Main pipeline on ${{ github.ref_name }} for ${{ github.ref }}"
+run-name: "Main pipfline on ${{ github.ref_name }}"
 
 "on":
   push: {}
@@ -14,4 +14,10 @@ jobs:
       run:
         shell: "bash"
     steps:
-      - uses: actions/checkout@v3
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+
+      - name: "Deploy app"
+        uses: "./.github/workflow/deploy.yml"
+        with:
+          some_var: "Hello world"

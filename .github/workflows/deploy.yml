@@ -3,7 +3,12 @@ name: "Deplly"
 run-name: "Deploy from ${{ github.ref_name }}"
 
 "on":
-  workflow_call: {}
+  workflow_call:
+    inputs:
+      some_var:
+        required: false
+        type: string
+        default: "hello"
 
 jobs:
   hello:
@@ -14,3 +19,5 @@ jobs:
         shell: "bash"
     steps:
       - uses: actions/checkout@v3
+
+      - run: "echo ${{ inputs.some_var }}"
