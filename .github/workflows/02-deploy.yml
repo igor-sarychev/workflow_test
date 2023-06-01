@@ -8,7 +8,7 @@ run-name: "Deploy from ${{ github.ref_name }}"
       some_var:
         required: false
         type: string
-        default: "hello"
+        default: ${{ vars.HELLO }}
 
 jobs:
   hello:

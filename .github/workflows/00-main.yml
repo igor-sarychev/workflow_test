@@ -20,5 +20,3 @@ jobs:
   deploy:
     needs: [some]
     uses: "./.github/workflows/02-deploy.yml"
-    with:
-      some_var: "Hello world"
