@@ -1,5 +1,5 @@
 ---
-name: "Deploy and app"
+name: "Deployment"
 run-name: "Deploy from ${{ github.ref_name }}"
 
 "on":

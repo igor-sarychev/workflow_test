@@ -4,7 +4,12 @@ run-name: "Main pipfline on ${{ github.ref_name }}"
 
 "on":
   # push: {}
-  pull_request: {}
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
 
 jobs:
   some:
