@@ -1,15 +1,28 @@
 name: "App_a and common"
 
 "on":
-  push:
+  pull_request:
+    types:
+      - opened
+      - reopened
     branches:
       - main
-    paths:
-      - "app_a/**"
-      - "common/**"
 
 jobs:
-  main:
+  prepare:
+    name: "Check and prepare environment"
+    runs-on: "self-hosted"
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Check environment"
+        run: echo "::notice::Here should be environment check"
+
+  build:
+    name: "Build artifacts"
     runs-on: "self-hosted"
     defaults:
       run:
