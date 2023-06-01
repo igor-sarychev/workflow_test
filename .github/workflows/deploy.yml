@@ -1,0 +1,16 @@
+---
+name: "Deplly"
+run-name: "Deploy from ${{ github.ref_name }}"
+
+"on":
+  workflow_call: {}
+
+jobs:
+  hello:
+    name: "Hello"
+    runs-on: "self-hosted"
+    defaults:
+      run:
+        shell: "bash"
+    steps:
+      - uses: actions/checkout@v3

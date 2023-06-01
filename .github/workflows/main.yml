@@ -1,0 +1,16 @@
+---
+name: "Main pipeline"
+run-name: "Main pipeline on ${{ github.ref_name }}"
+
+"on":
+  push:
+
+jobs:
+  some:
+    name: "some job"
+    runs-on: "self-hosted"
+    defaults:
+      run:
+        shell: "bash"
+    steps:
+      - uses: actions/checkout@v3
