@@ -1,6 +1,6 @@
 ---
 name: "Main pipeline"
-run-name: "Main pipeline on ${{ github.ref_name }}"
+run-name: "Main pipeline on ${{ github.ref_name }} for ${{ github.ref }}"
 
 "on":
   push:
