@@ -3,7 +3,7 @@ name: "Main pipeline"
 run-name: "Main pipfline on ${{ github.ref_name }}"
 
 "on":
-  push: {}
+  # push: {}
   pull_request: {}
 
 jobs:
@@ -17,11 +17,7 @@ jobs:
       - name: "Checkout repository"
         uses: actions/checkout@v3
 
-      - run: |
-          pwd
-          ls -lah ./.github/workflows/deploy.yml
-
       - name: "Deploy app"
-        uses: "./.github/workflows/deploy.yml"
+        uses: "https://github.com/igor-sarychev/workflow_test/blob/feature/.github/workflows/deploy.yml@feature"
         with:
           some_var: "Hello world"
