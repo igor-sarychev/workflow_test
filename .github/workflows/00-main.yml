@@ -25,3 +25,5 @@ jobs:
   deploy:
     needs: [some]
     uses: "./.github/workflows/02-deploy.yml"
+    with:
+      environment: "testing"
