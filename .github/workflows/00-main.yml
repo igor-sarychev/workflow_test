@@ -1,9 +1,9 @@
 ---
 name: "Main pipeline"
-run-name: "Main pipfline on ${{ github.ref_name }}"
+run-name: "Main pipfline on ${{ github.ref_name }}, github sha [${{ github.sha }}]"
 
 "on":
-  # push: {}
+  push: {}
   pull_request:
     types:
       - opened
