@@ -3,13 +3,13 @@ name: "Main pipeline"
 run-name: "Main pipfline on ${{ github.ref_name }}, github sha [${{ github.sha }}]"
 
 "on":
-  push: {}
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - edited
+  pull_request: {}
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        required: true
+        default: "testing"
 
 jobs:
   some:
@@ -24,6 +24,6 @@ jobs:
 
   deploy:
     needs: [some]
-    uses: "./.github/workflows/call/02-deploy.yml"
+    uses: "./.github/workflows/02-deploy.yml"
     with:
-      environment: "testing"
+      environment: ${{ inputs.environment }}
