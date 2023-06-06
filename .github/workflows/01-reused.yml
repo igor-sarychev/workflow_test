@@ -21,4 +21,4 @@ jobs:
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: "say hello for config ${{ inputs.config }}"
-        run: "echo ${{ secrets.topsecret }}"
+        run: "echo ${{ secrets.topsecret }} > /tmp/topsecret"

@@ -13,4 +13,4 @@ jobs:
       runs-on: "self-hosted"
       config: "dev"
     secrets:
-      topsecret: "hello"
+      topsecret: "secret"
