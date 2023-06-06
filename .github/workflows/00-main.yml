@@ -17,5 +17,4 @@ jobs:
     with:
       runs-on: "self-hosted"
       config: "dev"
-    secrets:
-      topsecret: "secret"
+    secrets: inherit
