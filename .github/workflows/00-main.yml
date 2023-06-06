@@ -3,21 +3,12 @@ name: "Main pipeline"
 run-name: "Main pipfline on [${{ github.ref_name }}]"
 
 "on":
-  workflow_dispatch:
-    inputs:
-      config:
-        description: "Configuration to deploy"
-        type: environment
-        default: dev
-  # push: {}
+  workflow_dispatch: {}
+  push: {}
 
 jobs:
   set_vars:
     runs-on: "self-hosted"
-    environment: ${{ inputs.config }}
-    outputs:
-      topsecret: ${{ steps.define_vars.outputs.justsecret }}
-      some: ${{ steps.define_vars.outputs.some }}
     steps:
       - name: "define vars"
         id: "define_vars"
