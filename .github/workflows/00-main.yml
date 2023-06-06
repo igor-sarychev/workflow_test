@@ -33,4 +33,4 @@ jobs:
       config: ${{ inputs.config }}
       some: ${{ needs.set_vars.outputs.some }}
     secrets:
-      justsecret: ${{ needs.set_vars.outputs.topsecret }}
+      justsecret: ${{ needs.set_vars.outputs.some }}
