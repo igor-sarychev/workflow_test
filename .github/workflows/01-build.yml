@@ -1,13 +1,8 @@
+---
 name: "App_a and common"
 
 "on":
-  push: {}
-  pull_request:
-    types:
-      - opened
-      - reopened
-    branches:
-      - main
+  workflow_call: {}
 
 jobs:
   prepare:
