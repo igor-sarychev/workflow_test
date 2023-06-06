@@ -3,8 +3,13 @@ name: "Main pipeline"
 run-name: "Main pipfline on [${{ github.ref_name }}]"
 
 "on":
-  workflow_dispatch: {}
-  push: {}
+  workflow_dispatch:
+    inputs:
+      config:
+        description: "Configuration to deploy"
+        type: environment
+        default: dev
+  # push: {}
 
 jobs:
   reused:
