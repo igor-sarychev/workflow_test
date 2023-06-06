@@ -16,5 +16,5 @@ jobs:
     uses: ./.github/workflows/01-reused.yml
     with:
       runs-on: "self-hosted"
-      config: "dev"
+      config: ${{ inputs.config }}
     secrets: inherit
