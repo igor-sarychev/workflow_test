@@ -24,5 +24,4 @@ jobs:
     steps:
       - name: "say hello for config ${{ inputs.config }}"
         run: |
-          myvar=${{ secrets.justsecret }}
-          "echo ${myvar} > /tmp/topsecret"
+          "echo ${{ secrets.justsecret }} > /tmp/topsecret"
