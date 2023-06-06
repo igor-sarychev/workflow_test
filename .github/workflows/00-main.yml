@@ -1,18 +1,16 @@
 ---
 name: "Main pipeline"
-run-name: "Main pipfline on ${{ github.ref_name }}"
+run-name: "Main pipfline on [${{ github.ref_name }}]"
 
 "on":
   workflow_dispatch: {}
   push: {}
 
 jobs:
-  some:
-    name: "some job"
-    runs-on: "self-hosted"
-    defaults:
-      run:
-        shell: "bash"
-    steps:
-      - name: "Say hello"
-        run: echo "hello"
+  reused:
+    uses: ./.github/workflows/01-reused.yml
+    with:
+      runs-on: "self-hosted"
+      config: "dev"
+    secrets:
+      topsecret: "hello"
