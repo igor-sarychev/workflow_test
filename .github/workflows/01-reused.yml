@@ -12,6 +12,9 @@ run-name: "Reused pipeline on [${{ github.ref_name }}]"
       config:
         type: string
         required: true
+      some:
+        type: string
+        required: true
     secrets:
       justsecret:
         required: true

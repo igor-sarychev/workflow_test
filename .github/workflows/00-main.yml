@@ -17,6 +17,7 @@ jobs:
     environment: ${{ inputs.config }}
     outputs:
       topsecret: ${{ steps.define_vars.outputs.justsecret }}
+      some: ${{ steps.define_vars.outputs.some }}
     steps:
       - name: "define vars"
         id: "define_vars"
@@ -24,6 +25,7 @@ jobs:
           justsecret=${{ secrets.TOPSECRET }}
           echo "::add-mask::$justsecret"
           echo "justsecret=\"$justsecret\"" >> $GITHUB_OUTPUT
+          echo "some=hohoho" >> $GITHUB_OUTPUT
 
   reused:
     needs: [set_vars]
@@ -31,5 +33,6 @@ jobs:
     with:
       runs-on: "self-hosted"
       config: ${{ inputs.config }}
+      some: ${{ needs.set_vars.outputs.some }}
     secrets:
       justsecret: ${{ needs.set_vars.outputs.topsecret }}
