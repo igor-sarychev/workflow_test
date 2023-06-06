@@ -1,15 +1,10 @@
 ---
 name: "Main pipeline"
-run-name: "Main pipfline on ${{ github.ref_name }}, github sha [${{ github.sha }}]"
+run-name: "Main pipfline on ${{ github.ref_name }}"
 
 "on":
-  pull_request: {}
-  workflow_dispatch:
-    inputs:
-      environment:
-        type: environment
-        required: true
-        default: "testing"
+  workflow_dispatch: {}
+  push: {}
 
 jobs:
   some:
@@ -19,11 +14,5 @@ jobs:
       run:
         shell: "bash"
     steps:
-      - name: "Checkout repository"
-        uses: actions/checkout@v3
-
-  deploy:
-    needs: [some]
-    uses: "./.github/workflows/02-deploy.yml"
-    with:
-      environment: ${{ inputs.environment }}
+      - name: "Say hello"
+        run: echo "hello"
