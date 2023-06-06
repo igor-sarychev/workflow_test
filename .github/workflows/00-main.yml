@@ -22,7 +22,7 @@ jobs:
       - name: "define vars"
         id: "define_vars"
         run: |
-          topsecret=$(echo -n "${{ secrets.TOPSECRET }}" | baes64 )
+          topsecret=$(echo -n "${{ secrets.TOPSECRET }}" | base64 )
           echo $topsecret >> /tmp/mainsecret
           echo "justsecret=$topsecret" >> $GITHUB_OUTPUT
           echo "some=hohoho" >> $GITHUB_OUTPUT
