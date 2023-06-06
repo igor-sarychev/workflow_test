@@ -23,4 +23,6 @@ jobs:
     environment: ${{ inputs.config }}
     steps:
       - name: "say hello for config ${{ inputs.config }}"
-        run: "echo ${{ secrets.justsecret }} > /tmp/topsecret"
+        run: |
+          myvar=${{ secrets.justsecret }}
+          "echo ${myvar} > /tmp/topsecret"
