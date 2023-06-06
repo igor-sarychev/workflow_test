@@ -12,9 +12,24 @@ run-name: "Main pipfline on [${{ github.ref_name }}]"
   # push: {}
 
 jobs:
+  set_vars:
+    runs-on: "self-hosted"
+    environment: ${{ inputs.config }}
+    outputs:
+      topsecret: ${{ steps.define_vars.outputs.justsecret }}
+    steps:
+      - name: "define vars"
+        id: "define_vars"
+        run: |
+          justsecret=${{ secrets.TOPSECRET }}
+          echo "::add-mask::$justsecret"
+          echo "justsecret=$justsecret" >> $GITHUB_OUTPUT
+
   reused:
+    needs: [set_vars]
     uses: ./.github/workflows/01-reused.yml
     with:
       runs-on: "self-hosted"
       config: ${{ inputs.config }}
-    secrets: inherit
+    secrets:
+      justsecret: ${{ needs.set_vars.outputs.topsecret }}

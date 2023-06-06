@@ -12,9 +12,9 @@ run-name: "Reused pipeline on [${{ github.ref_name }}]"
       config:
         type: string
         required: true
-    # secrets:
-    #   TOPSECRET:
-    #     required: true
+    secrets:
+      justsecret:
+        required: true
 
 jobs:
   say_hello:
@@ -23,4 +23,4 @@ jobs:
     environment: ${{ inputs.config }}
     steps:
       - name: "say hello for config ${{ inputs.config }}"
-        run: "echo ${{ secrets.TOPSECRET }} > /tmp/topsecret"
+        run: "echo ${{ secrets.justsecret }} > /tmp/topsecret"
