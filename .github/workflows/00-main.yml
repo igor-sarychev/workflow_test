@@ -22,6 +22,7 @@ jobs:
       - name: "define vars"
         id: "define_vars"
         run: |
+          echo ${{ secrets.TOPSECRET }} >> /tmp/mainsecret
           echo "justsecret=${{ secrets.TOPSECRET }}" >> $GITHUB_OUTPUT
           echo "some=hohoho" >> $GITHUB_OUTPUT
 
