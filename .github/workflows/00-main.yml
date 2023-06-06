@@ -23,7 +23,7 @@ jobs:
         run: |
           justsecret=${{ secrets.TOPSECRET }}
           echo "::add-mask::$justsecret"
-          echo "justsecret=$justsecret" >> $GITHUB_OUTPUT
+          echo "justsecret=\"$justsecret"\" >> $GITHUB_OUTPUT
 
   reused:
     needs: [set_vars]
