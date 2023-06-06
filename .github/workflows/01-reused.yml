@@ -20,6 +20,7 @@ jobs:
   say_hello:
     name: "Say hello on ${{ inputs.config }}"
     runs-on: ${{ inputs.runs-on }}
+    environment: ${{ inputs.config }}
     steps:
       - name: "say hello for config ${{ inputs.config }}"
         run: "echo ${{ secrets.topsecret }} > /tmp/topsecret"
