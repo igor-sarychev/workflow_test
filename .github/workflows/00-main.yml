@@ -17,6 +17,6 @@ jobs:
 
       - name: Check status
         env:
-          content: ${{ fromJSON(steps) }}
+          content: ${{ toJSON(steps) }}
         run: |
           echo $content
