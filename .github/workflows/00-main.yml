@@ -12,12 +12,18 @@ jobs:
     steps:
       - name: Failed 1
         id: failed1
-        continue-on-error: true
+        if: failure()
+        run: |
+          false
+
+      - name: Failed 2
+        id: failed2
+        if: failure()
         run: |
           false
 
       - name: Check status
-        if: steps.failed1.outcome == 'failure'
+        if: failure()
         env:
           content: ${{ toJSON(steps) }}
         run: |
