@@ -3,17 +3,20 @@ name: "Main pipeline"
 run-name: "Main pipfline on [${{ github.ref_name }}]"
 
 "on":
-  workflow_dispatch:
-    inputs:
-      configuration:
-        type: environment
-        required: true
-  # push: {}
+  workflow_dispatch: {}
+  push: {}
 
 jobs:
-  reuse:
-    uses: ./.github/workflows/01-reused.yml
-    with:
-      config: ${{ inputs.configuration }}
-    secrets:
-      justsecret: ${{ secrets.TOPSECRET }}
+  jobA:
+    runs-on: self-hosted
+    steps:
+      - name: Failed 1
+        continue-on-error: true
+        run: |
+          false
+
+      - name: Check status
+        env:
+          content: ${{ fromJSON(steps) }}
+        run: |
+          echo $content
