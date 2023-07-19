@@ -17,7 +17,7 @@ jobs:
           false
 
       - name: Check status
-        if: failed()
+        if: failure()
         env:
           content: ${{ toJSON(steps) }}
         run: |
