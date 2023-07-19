@@ -14,7 +14,7 @@ jobs:
         id: failed1
         continue-on-error: true
         run: |
-          false
+          true
 
       - name: Check status
         if: failure()
