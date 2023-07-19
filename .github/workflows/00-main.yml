@@ -12,9 +12,9 @@ jobs:
     steps:
       - name: Failed 1
         id: failed1
-        continue-on-error: true
+        # continue-on-error: true
         run: |
-          true
+          false
 
       - name: Check status
         if: failure()
